@@ -25,7 +25,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Widgets REQUIRED)
 
 if(ANDROID)
     add_library(autotyper SHARED
@@ -35,6 +35,8 @@ if(ANDROID)
 else()
     add_executable(autotyper
       main.cpp
+      textonly.cpp
+      textonly.h
       qml.qrc
     )
 endif()
@@ -43,3 +45,6 @@ target_compile_definitions(autotyper
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(autotyper
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+  
+target_link_libraries(autotyper PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
