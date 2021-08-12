@@ -4,7 +4,7 @@ import pytesseract
 def main():
     img = cv2.imread(sys.argv[1])
     # print
-    print(sys.argv[1])
+    # print(sys.argv[1])
     print(pytesseract.image_to_string(img))
     
     
